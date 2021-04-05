@@ -11,9 +11,14 @@
 > These are like notes for me pretty much -
 
 - [ ] User Page
-  - [ ] Add mutations for GraphQL - getUsers; getUser
-  - [ ] Create routes/pages on React frontend - '/users'
-  - [ ] Map each user to a Card with Semantic
+  - [x] Add mutations for GraphQL - getUsers; getUser
+    - [x] Tested on GraphQL Playground
+  - [x] Create routes/pages on React frontend - '/user(s)'
+  - [ ] Map user/users with Semantic UI Cards
+    - [x] UsersPage
+    - [x] UserProfile
+      - [ ] I'll obviously have to update the mongodb schema and include a bio as well as some other dev based things too. ima put ideas for that down below.
+      - [x] Update MenuBar to show Home always and if logged in put username on the far right side of MenuBar.
 - [ ] DARK MODE!!!!!!!!!!!!!!!!!!!!!!!!!!!!
   - [ ] Needs done asap as I hate working on this at night atm
     - [ ] May add this to mongo schema even to save preferences over devices, for now local storage lol
@@ -37,7 +42,11 @@ Semantic UI - https://react.semantic-ui.com/
 ### Push Information
 
 - April 5, 2021
-  - ADD: Initial push.
+
+  - ADD: Initial push. Everything after this was done by myself and my good friends Google, StackOverflow, and Github. Everything before was following on a tutorial.
+
+- April 5, 2021
+  - ADD: Setup backend for `getUser` and `getUsers(id)` queries.
 
 ## Contributing
 

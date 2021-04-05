@@ -11,6 +11,8 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import MenuBar from './components/MenuBar';
 import SinglePost from './pages/SinglePost';
+import UserProfile from './pages/UserProfile';
+import UsersPage from './pages/UsersPage';
 
 function App() {
 	return (
@@ -22,6 +24,8 @@ function App() {
 					<AuthRoute exact path='/login' component={Login} />
 					<AuthRoute exact path='/register' component={Register} />
 					<Route exact path='/posts/:postID' component={SinglePost} />
+					<Route exact path='/user/:id' component={UserProfile} />
+					<Route exact path='/users/' component={UsersPage} />
 				</Container>
 			</Router>
 		</AuthProvider>

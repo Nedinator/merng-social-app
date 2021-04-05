@@ -11,6 +11,13 @@ module.exports = gql`
 		likeCount: Int!
 		commentCount: Int!
 	}
+	type UserPage {
+		id: ID!
+		createdAt: String!
+		username: String!
+		email: String!
+		getPosts: [Post]
+	}
 	type Comment {
 		id: ID!
 		createdAt: String!
@@ -38,6 +45,8 @@ module.exports = gql`
 	type Query {
 		getPosts: [Post]
 		getPost(postID: ID!): Post
+		getUser(id: ID!): UserPage
+		getUsers: [User]
 	}
 	type Mutation {
 		register(registerInput: RegisterInput): User!
