@@ -1,7 +1,7 @@
 import { FETCH_USERS_QUERY } from '../utils/graphql';
 import React from 'react';
 import { useQuery } from '@apollo/client';
-import { Grid, Transition, Card, Image } from 'semantic-ui-react';
+import { Grid, Card, Image } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
 export default function UsersPage() {
@@ -18,10 +18,10 @@ export default function UsersPage() {
 				{loading ? (
 					<h1>Loading users...</h1>
 				) : (
-					<Transition.Group>
+					<Grid.Column>
 						{users &&
 							users.map((profile) => (
-								<Card fluid>
+								<Card>
 									<Card.Content>
 										<Image
 											floated='right'
@@ -40,7 +40,7 @@ export default function UsersPage() {
 									</Card.Content>
 								</Card>
 							))}
-					</Transition.Group>
+					</Grid.Column>
 				)}
 			</Grid.Row>
 		</Grid>

@@ -124,6 +124,12 @@ function SinglePost(props) {
 									{user && user.username === comment.username && (
 										<DeleteButton postID={id} commentID={comment.id} />
 									)}
+									{comment.username === username && (
+										<p style={{ color: 'teal' }}>
+											<Icon name='user' />
+											OP
+										</p>
+									)}
 									<Card.Header>{comment.username}</Card.Header>
 									<Card.Meta>{moment(comment.createdAt).fromNow()}</Card.Meta>
 									<Card.Description>{comment.body}</Card.Description>

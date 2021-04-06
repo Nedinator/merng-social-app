@@ -8,17 +8,17 @@
 
 ### Goals
 
-> These are like notes for me pretty much -
+> These are just notes for me.
 
-- [ ] User Page
+- [x] User Page
   - [x] Add mutations for GraphQL - getUsers; getUser
     - [x] Tested on GraphQL Playground
   - [x] Create routes/pages on React frontend - '/user(s)'
-  - [ ] Map user/users with Semantic UI Cards
+  - [x] Map user/users with Semantic UI Cards
     - [x] UsersPage
     - [x] UserProfile
-      - [ ] I'll obviously have to update the mongodb schema and include a bio as well as some other dev based things too. ima put ideas for that down below.
       - [x] Update MenuBar to show Home always and if logged in put username on the far right side of MenuBar.
+- [x] Cool, completely useless, but cool looking little OP badge on posts.
 - [ ] DARK MODE!!!!!!!!!!!!!!!!!!!!!!!!!!!!
   - [ ] Needs done asap as I hate working on this at night atm
     - [ ] May add this to mongo schema even to save preferences over devices, for now local storage lol
@@ -26,13 +26,14 @@
 - [ ] Profile Update Page
   - [ ] GraphQL mutations - steams off getUser; editUser
   - [ ] Create semantic forms to display current info.
-    - [ ] Password is going to be extra hard
-    - [ ] As well as uploading profile pictures and storing them... somewhere?
-- [ ] Add likes (maybe replies?) to comments
-  - [ ] Update mongo schema
-  - [ ] Update all mutations that'll require this info
-    - [ ] I'll add these once I get closer.
-- [ ] May make CommentSection its own component.
+    - [ ] File upload for profile pictures
+      - [x] Update user schema to accept buffers; hopefully this works?
+      - [ ] Add mutations and update queries for profile pictures. Find default and include that in account creation process?
+- [x] Add likes (maybe replies?) to comments
+  - [x] Update mongo schema
+  - [x] Update all mutations that'll require this info
+  - [ ] Add to frontend
+- [ ] Completely change the app so creating a post takes you to a new editor and gives more options with formatting.
 
 ### Resources
 
@@ -46,7 +47,11 @@ Semantic UI - https://react.semantic-ui.com/
   - ADD: Initial push. Everything after this was done by myself and my good friends Google, StackOverflow, and Github. Everything before was following on a tutorial.
 
 - April 5, 2021
-  - ADD: Setup backend for `getUser` and `getUsers(id)` queries.
+
+  - ADD: Setup backend for `getUser` and `getUsers(id)` queries. Setup frontend to display user list and user profile.
+
+- April 6, 2021
+  - UPDATE: Updating user/post mongoose schemas to reflect new changes of likes and comments containing comments (not too sure if thatll work yet) as well as updating typeDefs to accommodate for these changes as well
 
 ## Contributing
 

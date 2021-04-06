@@ -16,13 +16,17 @@ module.exports = gql`
 		createdAt: String!
 		username: String!
 		email: String!
-		getPosts: [Post]
+		bio: String
+		technologies: [String]
+		getComments: [Comment]
 	}
 	type Comment {
 		id: ID!
 		createdAt: String!
 		username: String!
 		body: String!
+		comments: [Comment!]
+		likes: [Likes]
 	}
 	type Like {
 		id: ID!
@@ -35,12 +39,22 @@ module.exports = gql`
 		token: String!
 		username: String!
 		createdAt: String!
+		comments: [Comment]
+		bio: String
+		technologies: [String]
 	}
 	input RegisterInput {
 		username: String!
 		password: String!
 		confirmPassword: String!
 		email: String!
+	}
+	input updateInput {
+		password: String
+		confirmPassword: String
+		email: String
+		bio: String
+		technologies: [String]
 	}
 	type Query {
 		getPosts: [Post]
@@ -53,9 +67,11 @@ module.exports = gql`
 		login(username: String!, password: String!): User!
 		createPost(body: String!): Post!
 		deletePost(postID: ID!): String!
-		createComment(postID: ID!, body: String!): Post!
+		createComment(postID: ID!, commentID: ID!, body: String!): Post!
 		deleteComment(postID: ID!, commentID: ID!): Post!
 		likePost(postID: ID!): Post!
+		likeComment(commentID: ID!): Comment!
+		updateUser(updateInput: updateInput): User!
 	}
 	type Subscription {
 		newPost: Post!
