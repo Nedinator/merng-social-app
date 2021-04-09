@@ -1,9 +1,10 @@
-import React from 'react';
-import { Card, Image } from 'semantic-ui-react';
+import React, { useContext } from 'react';
+import { Card, Image, Button } from 'semantic-ui-react';
 import moment from 'moment';
 import { Link } from 'react-router-dom';
-
-export default function ProfileCard({ id, createdAt, username }) {
+import { AuthContext } from '../context/auth';
+export default function ProfileCard({ id, createdAt, username, bio }) {
+	const { user } = useContext(AuthContext);
 	return (
 		<Card fluid>
 			<Card.Content>
@@ -19,6 +20,14 @@ export default function ProfileCard({ id, createdAt, username }) {
 					{username}
 				</Card.Header>
 				<Card.Meta>Created: {moment(createdAt).fromNow()}</Card.Meta>
+				<Card.Content>
+					{user && user.id === id && (
+						<Button as={Link} to={`/user/${id}/edit`}>
+							Edit Profile
+						</Button>
+					)}
+				</Card.Content>
+				<Card.Content extra>{bio && <p>Bio: {bio}</p>}</Card.Content>
 			</Card.Content>
 		</Card>
 	);

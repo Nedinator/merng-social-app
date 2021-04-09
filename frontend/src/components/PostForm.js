@@ -50,7 +50,7 @@ export default function PostForm() {
 			{error && (
 				<div className='ui error message' style={{ marginBottom: 25 }}>
 					<ul className='list'>
-						<li>{error.graphQLErrors[0].message}</li>
+						<li>something went wrong this buggin</li>
 					</ul>
 				</div>
 			)}
@@ -76,6 +76,10 @@ const CREATE_POST_MUTATION = gql`
 				body
 				username
 				createdAt
+				likes {
+					username
+					createdAt
+				}
 			}
 			commentCount
 		}

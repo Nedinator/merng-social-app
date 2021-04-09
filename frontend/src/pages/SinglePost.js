@@ -13,6 +13,7 @@ import {
 import moment from 'moment';
 import { AuthContext } from '../context/auth';
 import LikeButton from '../components/LikeButton';
+import CommentLikeButton from '../components/CommentLikeButton';
 import DeleteButton from '../components/DeleteButton';
 import MyPopup from '../utils/MyPopup';
 function SinglePost(props) {
@@ -121,6 +122,12 @@ function SinglePost(props) {
 						{comments.map((comment) => (
 							<Card fluid key={comment.id}>
 								<Card.Content>
+									<CommentLikeButton
+										user={user}
+										commentID={comment.id}
+										commentLikes={comment.likes}
+										postID={postID}
+									/>
 									{user && user.username === comment.username && (
 										<DeleteButton postID={id} commentID={comment.id} />
 									)}
@@ -153,6 +160,7 @@ const FETCH_POST_QUERY = gql`
 			likeCount
 			likes {
 				username
+				createdAt
 			}
 			commentCount
 			comments {
@@ -160,6 +168,10 @@ const FETCH_POST_QUERY = gql`
 				username
 				createdAt
 				body
+				likes {
+					username
+					createdAt
+				}
 			}
 		}
 	}
@@ -175,6 +187,10 @@ const CREATE_COMMENT_MUTATION = gql`
 				body
 				createdAt
 				username
+				likes {
+					username
+					createdAt
+				}
 			}
 			commentCount
 		}

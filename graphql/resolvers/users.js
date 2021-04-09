@@ -83,7 +83,6 @@ module.exports = {
 			if (!valid) {
 				throw new UserInputError('Errors', { errors });
 			}
-			// TODO: Make sure user doesnt already exist
 			const user = await User.findOne({ username });
 			if (user) {
 				throw new UserInputError('Username is taken', {
@@ -103,6 +102,26 @@ module.exports = {
 			});
 
 			const res = await newUser.save();
+
+			const token = generateToken(res);
+
+			return {
+				...res._doc,
+				id: res._id,
+				token,
+			};
+		},
+		//updateUser
+		async updateUser(_, { updateInput: { bio } }) {
+			const user = await User.findOne({ username });
+			if (user) {
+				user.bio = bio;
+			} else {
+				throw new Error('Invalid login token.');
+			}
+			// hash password and create an auth token
+
+			const res = await user.save();
 
 			const token = generateToken(res);
 

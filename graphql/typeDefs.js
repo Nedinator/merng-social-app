@@ -17,7 +17,6 @@ module.exports = gql`
 		username: String!
 		email: String!
 		bio: String
-		technologies: [String]
 		getComments: [Comment]
 	}
 	type Comment {
@@ -25,8 +24,8 @@ module.exports = gql`
 		createdAt: String!
 		username: String!
 		body: String!
-		comments: [Comment!]
-		likes: [Likes]
+		likes: [Like]
+		likeCount: Int!
 	}
 	type Like {
 		id: ID!
@@ -39,9 +38,7 @@ module.exports = gql`
 		token: String!
 		username: String!
 		createdAt: String!
-		comments: [Comment]
 		bio: String
-		technologies: [String]
 	}
 	input RegisterInput {
 		username: String!
@@ -50,11 +47,7 @@ module.exports = gql`
 		email: String!
 	}
 	input updateInput {
-		password: String
-		confirmPassword: String
-		email: String
 		bio: String
-		technologies: [String]
 	}
 	type Query {
 		getPosts: [Post]
@@ -67,11 +60,11 @@ module.exports = gql`
 		login(username: String!, password: String!): User!
 		createPost(body: String!): Post!
 		deletePost(postID: ID!): String!
-		createComment(postID: ID!, commentID: ID!, body: String!): Post!
+		createComment(postID: ID!, body: String!): Post!
 		deleteComment(postID: ID!, commentID: ID!): Post!
 		likePost(postID: ID!): Post!
-		likeComment(commentID: ID!): Comment!
-		updateUser(updateInput: updateInput): User!
+		likeComment(postID: ID!, commentID: ID!): Comment!
+		updateUser(id: ID!, password: String!, updateInput: updateInput): User!
 	}
 	type Subscription {
 		newPost: Post!

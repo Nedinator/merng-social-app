@@ -1,21 +1,26 @@
+// honestly, tying multiple mutations into the same component is above my head...
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Button, Icon, Label } from 'semantic-ui-react';
 import { useMutation } from '@apollo/client';
 import gql from 'graphql-tag';
 import MyPopup from '../utils/MyPopup';
-export default function LikeButton({ user, post: { id, likes, likeCount } }) {
-	const [liked, setLiked] = useState(false);
 
+export default function CommentLikeButton({
+	user,
+	commentID,
+	commentLikes,
+	postID,
+}) {
+	const [liked, setLiked] = useState(false);
 	useEffect(() => {
-		if (user && likes.find((like) => like.username === user.username)) {
+		if (user && commentLikes.find((like) => like.username === user.username)) {
 			setLiked(true);
 		} else setLiked(false);
-	}, [user, likes]);
+	}, [user, commentLikes]);
 
-	const [likePost] = useMutation(LIKE_POST_MUTATION, {
-		variables: { postID: id },
-		errorPolicy: 'all',
+	const [likePost] = useMutation(LIKE_COMMENT_MUTATION, {
+		variables: { postID: postID, commentID: commentID },
 	});
 
 	const likeButton = user ? (
@@ -35,24 +40,24 @@ export default function LikeButton({ user, post: { id, likes, likeCount } }) {
 	);
 
 	return (
-		<Button as='div' labelPosition='right' onClick={likePost}>
+		<Button as='div' labelPosition='right' floated='right' onClick={likePost}>
 			<MyPopup content={liked ? 'Unlike' : 'Like'}>{likeButton}</MyPopup>
 			<Label as='a' basic color='blue' pointing='left'>
-				{likeCount}
+				{commentLikes.length}
 			</Label>
 		</Button>
 	);
 }
 
-const LIKE_POST_MUTATION = gql`
-	mutation likePost($postID: ID!) {
-		likePost(postID: $postID) {
+const LIKE_COMMENT_MUTATION = gql`
+	mutation likeComment($postID: ID!, $commentID: ID!) {
+		likeComment(postID: $postID, commentID: $commentID) {
 			id
 			likes {
 				id
 				username
+				createdAt
 			}
-			likeCount
 		}
 	}
 `;

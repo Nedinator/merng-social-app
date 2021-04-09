@@ -10,7 +10,6 @@ const userSchema = new Schema({
 	email: String,
 	createdAt: String,
 	bio: String,
-	technologies: [],
 	comments: [
 		{
 			body: String,
